@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Futuristic background */
+        body {
+            background: radial-gradient(circle, #0d1b2a 0%, #1b263b 100%);
+            color: #00eaff;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Title */
+        h1 {
+            font-size: 50px;
+            margin-bottom: 60px;
+            text-shadow: 0 0 15px #00eaff, 0 0 30px #00eaff;
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* 3D effect for button */
+        .play-button {
+            background: linear-gradient(45deg, #00eaff, #0077ff);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            padding: 25px 80px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(0, 234, 255, 0.8);
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            transform: perspective(600px) rotateX(0deg) rotateY(0deg); /* Start with no rotation */
+        }
+
+        /* Hover effect for 3D button */
+        .play-button:hover {
+            box-shadow: 0 0 60px rgba(0, 234, 255, 1); /* More intense light */
+            transform: perspective(600px) rotateX(30deg) rotateY(5deg) scale(1.1); /* Rotate and scale */
+        }
+
+        /* Button press effect */
+        .play-button:active {
+            transform: scale(0.9); /* Shrink the button on click */
+        }
+
+        /* Loading animation */
+        .loading {
+            font-size: 20px;
+            margin-top: 30px;
+            color: #00eaff;
+            letter-spacing: 5px;
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* Animated dots */
+        .dot {
+            animation: blink 1.5s infinite;
+        }
+
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.3s; }
+        .dot:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Hide elements during transition */
+        .hidden {
+            opacity: 0;
+        }
+
+        /* New music button */
+        .music-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #00eaff;
+            color: white;
+            font-size: 18px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.6);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .music-button:hover {
+            background-color: #0077ff;
+            box-shadow: 0 0 20px rgba(0, 234, 255, 1);
+        }
+
+        /* Particle effect */
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: rgba(0, 234, 255, 0.8);
+            border-radius: 50%;
+            animation: moveParticle 1.5s ease-out forwards;
+        }
+
+        @keyframes moveParticle {
+            0% {
+                transform: scale(1) translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0) translate(var(--x), var(--y));
+                opacity: 0;
+            }
+        }
+
+        /* Cursors and particles */
+        #cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(0, 234, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor-trail {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(0, 234, 255, 0.6);
+            border-radius: 50%;
+            animation: trailParticle 1s ease-out forwards;
+        }
+
+        @keyframes trailParticle {
+            0% {
+                transform: scale(1) translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0) translate(var(--x), var(--y));
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background audio -->
+    <audio id="background-audio" loop>
+        <source src="background.mp3" type="audio/mp3">
+    </audio>
+
+    <h1 id="title">WELCOME TO AI SITE</h1>
+    <button class="play-button" onclick="startGame()">PLAY</button>
+
+    <!-- Loading effect -->
+    <div id="loading" class="loading">LOADING<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></div>
+
+    <!-- Music button -->
+    <button class="music-button" onclick="playMusic()">Play Music</button>
+
+    <!-- Particles container -->
+    <div id="particles-container"></div>
+
+    <script>
+        // Start game and transition
+        function startGame() {
+            document.getElementById('title').classList.add('hidden');
+            document.querySelector('.play-button').classList.add('hidden');
+            document.getElementById('loading').classList.add('hidden');
+            
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 1000);
+        }
+
+        // Play background music
+        function playMusic() {
+            var audio = document.getElementById('background-audio');
+            audio.play().catch(function(e) {
+                console.log("Audio not played automatically: " + e);
+            });
+        }
+
+        // Create particles at mouse position
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Set random movement direction
+            const randomX = Math.random() * 100 - 50; // Random movement on X axis
+            const randomY = Math.random() * 100 - 50; // Random movement on Y axis
+
+            particle.style.setProperty('--x', `${randomX}px`);
+            particle.style.setProperty('--y', `${randomY}px`);
+
+            // Position the particle slightly behind the cursor
+            particle.style.left = `${x - 20}px`; // 20px behind the cursor
+            particle.style.top = `${y - 20}px`; // 20px behind the cursor
+
+            document.getElementById('particles-container').appendChild(particle);
+
+            // Remove the particle after animation ends
+            setTimeout(() => {
+                particle.remove();
+            }, 1500); // Match duration with the animation time
+        }
+
+        // Follow cursor with particle effect
+        document.addEventListener('mousemove', function(e) {
+            const cursor = document.getElementById('cursor');
+            cursor.style.left = `${e.clientX - cursor.offsetWidth / 2}px`;
+            cursor.style.top = `${e.clientY - cursor.offsetHeight / 2}px`;
+
+            createParticle(e.clientX, e.clientY);
+            createCursorTrail(e.clientX, e.clientY); // Call to create a trailing particle
+        });
+
+        // Initialize custom cursor
+        const cursor = document.createElement('div');
+        cursor.id = 'cursor';
+        document.body.appendChild(cursor);
+
+        // Function to create the trailing particles behind the cursor
+        function createCursorTrail(x, y) {
+            const trail = document.createElement('div');
+            trail.classList.add('cursor-trail');
+            trail.style.left = `${x - 10}px`; // Slightly offset from the cursor
+            trail.style.top = `${y - 10}px`;
+            
+            // Set random movement for the trail
+            const randomX = Math.random() * 10 - 5;
+            const randomY = Math.random() * 10 - 5;
+            trail.style.setProperty('--x', `${randomX}px`);
+            trail.style.setProperty('--y', `${randomY}px`);
+
+            document.getElementById('particles-container').appendChild(trail);
+
+            // Remove the trail after animation
+            setTimeout(() => {
+                trail.remove();
+            }, 1000); // Matches the duration of the trail animation
+        }
+    </script>
+
+</body>
+</html>

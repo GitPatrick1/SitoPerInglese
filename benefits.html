@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefits of Artificial Intelligence</title>
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(90deg, #69cdff, #005f73, #003b44);
+            background-size: 300% 300%;
+            color: #004466;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            animation: gradientWave 15s ease-in-out infinite;
+            margin: 0;
+            padding-top: 50px;
+        }
+
+        /* Header styling */
+        header {
+            width: 100%;
+            background-color: #005f73;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Menu toggle button */
+        #menu-toggle {
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            z-index: 20;
+        }
+        /* Back to home link styling */
+        .back-home {
+            text-decoration: none;
+            color: #005f73;
+            margin-top: 70px;
+            font-weight: bold;
+            background-color: #ffffff; /* White background for better visibility */
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid #005f73; /* Border to match header color */
+        }
+
+        .back-home:hover {
+            text-decoration: underline;
+            background-color: #f1f7fb;
+        }
+
+        /* Popup menu styling */
+        #popup-menu {
+            display: none;
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background-color: #005f73;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Menu animation */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        #popup-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #popup-menu ul li {
+            margin: 10px;
+        }
+
+        #popup-menu ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+			transition: color 0.3s;
+        }
+		#popup-menu a:hover {
+            color: #87CEEB;
+        }
+
+        /* Main content */
+        .main-content {
+            width: 100%;
+            padding: 20px;
+            padding-top: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .box {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Logo Container */
+        .logo-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        /* DevinAI Logo */
+        .devin-logo {
+            width: 150px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        /* Hover effect */
+        .devin-logo:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        /* Active effect */
+        .devin-logo:active {
+            transform: scale(0.9);
+        }
+
+        /* Button styling */
+        .generate-btn {
+            background-color: #005f73;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Add other existing styles from the initial code */
+    </style>
+</head>
+<body>
+    <!-- Menu Button -->
+    <div id="menu-toggle">&#9776;</div>
+
+    <!-- Popup Menu -->
+    <div id="popup-menu">
+        <ul>
+            <li><a href="risks.html">Risks</a></li>
+            <li><a href="future.html">Future</a></li>
+            <li><a href="History.html">History</a></li>
+            <li><a href="3d.html">3D Models</a></li>
+			<li><a href="legal.html">Legal</a></li>
+        </ul>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <h1>Benefits of Artificial Intelligence</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Benefits and Practical Example -->
+        <div class="content-row" id="benefits">
+            <div class="box">
+                <h3>Benefits of Artificial Intelligence</h3>
+                <p>AI is transforming industries and improving the way we live and work. Some of the key benefits include:</p>
+                <ul>
+                    <li><strong>Automates Repetitive Tasks:</strong> AI can take over repetitive and time-consuming tasks such as data entry or scheduling, allowing employees to focus on more complex, strategic work, improving overall productivity and job satisfaction.</li>
+                    <li><strong>Analyzes Large Data Sets Quickly:</strong> AI can process vast amounts of data at high speed, identifying trends, patterns, and correlations that would be time-consuming or impossible for humans to detect.</li>
+                    <li><strong>Improves Decision Making:</strong> With AI, businesses can access real-time analytics and predictive models, enabling faster, data-driven decisions that are more accurate and informed.</li>
+                    <li><strong>Generates New Material:</strong> AI tools help create content like articles, code, or design elements rapidly, streamlining workflows and enabling professionals to focus on refining ideas and tackling more creative challenges.</li>
+                    <li><strong>Reduces Operational Costs:</strong> Automation via AI reduces manual intervention, lowers the chances of errors, and optimizes processes, resulting in cost savings for companies while maintaining efficiency and scalability.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- DevinAI Logo -->
+        <div class="logo-container">
+            <a href="https://devin.ai/" target="_blank">
+                <img src="devin.png" alt="DevinAI Logo" class="devin-logo">
+            </a>
+        </div>
+
+        <!-- Back to Home Link -->
+        <a href="index.html" class="back-home">Back to Home</a>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Toggle menu visibility
+        document.getElementById("menu-toggle").onclick = function() {
+            const menu = document.getElementById("popup-menu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        };
+    </script>
+
+</body>
+</html>

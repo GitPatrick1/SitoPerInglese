@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Models</title>
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Palette di colori */
+        :root {
+            --main-bg-color: #6A1B9A; /* Viola */
+            --accent-color: #9C27B0; /* Viola scuro */
+            --highlight-color: #AB47BC; /* Viola chiaro */
+            --text-color: #FFFFFF; /* Bianco */
+            --border-color: #BB86FC; /* Viola chiaro */
+            --button-bg: #8E24AA; /* Colore dei bottoni */
+        }
+
+        /* Effetto di rimpicciolimento della barra al scroll */
+        body {
+            margin: 0;
+            height: 100%;
+            font-family: 'Orbitron', sans-serif;
+            background-color: var(--main-bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: var(--text-color);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Contenitore per il layout a due colonne */
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 100px; /* Spazio per l'header fisso */
+        }
+
+        /* Colonna di testo a sinistra */
+        .text-column {
+            width: 65%;
+            text-align: left;
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-right: 30px;
+        }
+
+        .text-column p {
+            margin-bottom: 20px;
+        }
+
+        /* Barra laterale a destra con modelli */
+        .sidebar {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 35px;
+        }
+
+        .sketchfab-embed-wrapper {
+            width: 100%;
+            height: 300px; /* Altezza dei modelli */
+            border: 3px solid var(--border-color); /* Contorno viola chiaro */
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .description {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: var(--text-color);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Header styles */
+        .header {
+            background: var(--accent-color);
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            transition: padding 0.3s ease, font-size 0.3s ease;
+        }
+
+        .header.shrunk {
+            padding: 10px 0;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: var(--text-color);
+            margin: 0;
+            transition: font-size 0.3s ease;
+        }
+
+        .header.shrunk h1 {
+            font-size: 24px;
+        }
+		
+		#menu-toggle {
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+		#popup-menu {
+            display: none;
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background-color: #9400D3;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+		@keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+		#popup-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #popup-menu ul li {
+            margin: 10px 0;
+        }
+
+        #popup-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        #popup-menu a:hover {
+            color: #FF00FF;
+        }
+
+        /* Container for the button, centered horizontally */
+        .button-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* Button styling */
+        .button {
+            background-color: var(--button-bg);
+            color: var(--text-color);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .button:hover {
+            background-color: var(--highlight-color);
+            transform: scale(1.05);
+        }
+
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        /* Loghi*/
+        .logos-container {
+            display: flex;
+            align-items: center;
+            gap: 20px; /* Distanza tra i loghi */
+            justify-content: center; /* Centra orizzontalmente i loghi */
+            margin-top: 30px; /* Spazio sopra i loghi */
+        }
+
+        .logos-container .provided-by {
+            font-size: 18px;
+            color: var(--text-color);
+        }
+
+        .logos-container a {
+            display: flex;
+            justify-content: center;
+        }
+
+        .logos-container img {
+            width: 150px; /* Impostiamo la larghezza del logo */
+            height: 150px; /* Impostiamo l'altezza del logo */
+            object-fit: contain; /* Manteniamo le proporzioni del logo */
+            background-color: transparent; /* Assicuriamoci che lo sfondo sia trasparente */
+            border-radius: 8px; /* Opzionale: puoi aggiungere angoli arrotondati se vuoi */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>3D Models</h1>
+		<div id="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav id="popup-menu">
+            <ul>
+                <li><a href="benefits.html">Benefits</a></li>
+                <li><a href="risks.html">Risks</a></li>
+                <li><a href="future.html">Future</a></li>
+                <li><a href="history.html">History</a></li>
+				<li><a href="legal.html">Legal</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Left Column with Text -->
+        <div class="text-column">
+            <h2>3D Models and Artificial Intelligence</h2>
+            <p>In the realm of <strong>3D modeling</strong>, <strong>artificial intelligence</strong> has transformed the way we create and interact with virtual objects. AI technologies such as <strong>machine learning</strong>, <strong>neural networks</strong>, and <strong>procedural generation algorithms</strong> have empowered creators to build intricate and dynamic 3D models more efficiently and with greater precision.</p>
+            <p>Previously, creating realistic 3D models for <strong>games</strong>, <strong>movies</strong>, or <strong>simulations</strong> was a labor-intensive process requiring significant skill and time. With the advent of AI-driven tools, artists can now leverage intelligent systems that assist with tasks like <strong>texture generation</strong>, <strong>rigging</strong>, and even the automatic generation of <strong>environments</strong>. These tools are not only speeding up the creative process but are also pushing the boundaries of what can be achieved with 3D modeling in virtual worlds.</p>
+            <p><strong>AI-driven systems</strong> can generate complex shapes, analyze real-world data to create lifelike models, and even generate entirely new forms based on input data. This synergy between human creativity and AI's computational power has opened new possibilities for designers and developers alike, enhancing everything from <strong>realistic character models</strong> to expansive <strong>digital landscapes</strong> used in video games and virtual reality environments.</p>
+        </div>
+
+        <!-- Right Sidebar with Models -->
+        <div class="sidebar">
+            <div class="sketchfab-embed-wrapper">
+                <iframe title="oBot - Cute Robot Challenge" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/17fe944bd57941cabb698fe9d0a4f3c2/embed"></iframe>
+                <div class="description">
+                    <p><strong>oBot - Cute Robot Challenge</strong><br>A charming robot model, designed for a fun and engaging challenge, showcasing creativity and AI-driven design techniques.</p>
+                </div>
+            </div>
+
+            <div class="sketchfab-embed-wrapper">
+                <iframe title="Kirby's Robobot from - Planet Robobot" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/9fe53ce43c474990abf10231edf73f5c/embed"></iframe>
+                <div class="description">
+                    <p><strong>Kirby's Robobot from - Planet Robobot</strong><br>A 3D model of Kirby's Robobot, showcasing the character from the "Planet Robobot" game, illustrating advanced model generation in gaming.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Provided By Section -->
+    <div class="logos-container">
+        <div class="provided-by">Provided by:</div>
+        <a href="https://unity.com/" target="_blank">
+            <img src="unity.png" alt="Unity Logo">
+        </a>
+        <a href="https://godotengine.org/" target="_blank">
+            <img src="godot.png" alt="Godot Logo">
+        </a>
+    </div>
+
+    <!-- Button Section -->
+    <div class="button-container">
+        <a href="index.html"><button class="button">Back to Home</button></a>
+    </div>
+	<script>
+        function toggleMenu() {
+            const menu = document.getElementById('popup-menu');
+            const currentState = menu.style.display;
+            menu.style.display = currentState === 'block' ? 'none' : 'block';
+
+            if (currentState !== 'block') {
+                setTimeout(() => {
+                    menu.style.display = 'block';
+                }, 500);
+            }
+        }
+	</script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History of AI</title>
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General reset */
+        /*@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');*/
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and layout */
+        body {
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header styling */
+        .header {
+            background-color: #000000;
+            color: #e100ff;
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgb(183, 0, 255);
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 50px;
+            text-transform: uppercase;
+            text-align: center;
+            background: linear-gradient(to right, #fc72ff, #8f68ff, #487bff, #8f68ff, #fc72ff);
+            background-size: 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: animate-gradient 2.5s linear infinite;
+        }
+
+        @keyframes animate-gradient {
+            to {
+                background-position: 200%;
+            }
+        }
+
+        /* Main content layout */
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 20px;
+            left: 0;
+        }
+
+        .text-column {
+            text-align: left;
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 800px;
+            flex: 1 1 60%;
+        }
+
+        /* Chatbot container */
+        .chat-container {
+            flex: 1 1 40%;
+            background-color: #7a0178;
+            border: 1px solid #000000;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgb(225, 0, 255);
+        }
+
+        .chat-container h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .chat-box {
+            overflow-y: auto;
+            height: 400px;
+            margin-bottom: 20px;
+            border: 1px solid #000000;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #272727;
+            color: #333;
+        }
+
+        .chat-box .bot-message {
+            background-color: #000000;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 8px;
+            color: #ffffff;
+        }
+
+        .chat-box .user-message {
+            background-color: #ee8bff;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 8px;
+            text-align: right;
+        }
+
+        .chat-input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .send-button {
+            margin-top: 10px;
+            padding: 1em 2em;
+            background-color: #333;
+            border: none;
+            color: #ffffff;
+            border-radius: 1000px;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .send-button::after {
+            content: '';
+            position: absolute;
+            height: 108%;
+            width: 103%;
+            border-radius: 1000px;
+            background-image: linear-gradient(to bottom right, #008cff, #e100ff);
+            z-index: -1;
+        }
+
+        .send-button:hover {
+            z-index: 0;
+            box-shadow: 40px 0 100px #008cff6c, -40px 0 100px #e100ff;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .back-btn {
+            padding: 1.25em 2.75em;
+            background-color: #333;
+            border: none;
+            color: #ffffff;
+            border-radius: 1000px;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .back-btn::after {
+            content: '';
+            position: absolute;
+            height: 108%;
+            width: 103%;
+            border-radius: 1000px;
+            background-image: linear-gradient(to bottom right, #008cff, #e100ff);
+            z-index: -1;
+        }
+
+        .back-btn:hover {
+            z-index: 0;
+            box-shadow: 40px 0 100px #008cff25, -40px 0 100px #e100ff31;
+        }
+
+        .video-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+		#menu-toggle {
+            font-size: 30px;
+            cursor: pointer;
+            color: #e100ff;
+            position: absolute;
+            right: 20px;
+            top: 35px;
+        }
+		#popup-menu {
+            display: none;
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background-color: #8f68ff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+		}
+		@keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+		#popup-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #popup-menu ul li {
+            margin: 10px 0;
+        }
+
+        #popup-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        #popup-menu a:hover {
+            color: #fc72ff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>HISTORY OF ARTIFICIAL INTELLIGENCE</h1>
+		<div id="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav id="popup-menu">
+            <ul>
+                <li><a href="benefits.html">Benefits</a></li>
+                <li><a href="3d.html">3D Models</a></li>
+                <li><a href="future.html">Future</a></li>
+                <li><a href="risks.html">Risks</a></li>
+				<li><a href="legal.html">Legal</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="text-column" style="border: 5px solid #e100ff; padding: 2px; text-align: left; border-radius: 10px;">
+            <h2>Introduction to AI History</h2>
+            <p>The history of artificial intelligence (AI) dates back to the mid-20th century, when researchers first
+                began to explore the possibility of creating machines capable of mimicking human thought
+                processes. The term "artificial intelligence" was coined in 1956 during a workshop at Dartmouth
+                College, where scientists like <b>John McCarthy</b>, <b>Marvin Minsky</b>, and <b>Allen Newell</b> laid the foundation for
+                the field. Early achievements focused on symbolic reasoning and problem-solving, with computers
+                solving mathematical equations and playing games like chess. In the 1980s, the development of
+                expert systems brought AI closer to practical applications, using knowledge bases to simulate human
+                decision-making in fields like medicine and engineering. However, progress slowed due to
+                limitations in computational power and funding, leading to the so-called "AI winter." The resurgence
+                of AI in the 21st century has been driven by advancements in machine learning, neural networks, and
+                the exponential growth of data and computing power. Today, AI plays a transformative role in
+                industries ranging from healthcare and finance to autonomous vehicles and creative arts, making it a
+                cornerstone of modern technological innovation.</p>
+        </div>
+
+        <div class="chat-container">
+            <h2>HistoryBot Chat</h2>
+            <div class="chat-box" id="chat-box">
+                <div class="bot-message">Hello! How can I assist you with AI history today?</div>
+            </div>
+            <input type="text" id="user-input" class="chat-input" placeholder="Type your message...">
+            <button id="send-btn" class="send-button">Send</button>
+        </div>
+    </div>
+
+    <!-- Video Section -->
+    <div class="video-container">
+        <h2>Watch This Video about AI's History</h2>
+        <iframe 
+            width="700" 
+            height="350" 
+            src="https://www.youtube.com/embed/33k89e_LsiQ" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen
+            style="border: 5px solid #e100ff; border-radius: 10px;">
+        </iframe>
+    </div>
+    
+
+    <!-- Button Section -->
+    <div class="button-container">
+        <a href="index.html"><button class="back-btn">Back to Home</button></a>
+    </div>
+	<script src="script.js"></script>
+
+	<script>
+        function toggleMenu() {
+            const menu = document.getElementById('popup-menu');
+            const currentState = menu.style.display;
+            menu.style.display = currentState === 'block' ? 'none' : 'block';
+
+            if (currentState !== 'block') {
+                setTimeout(() => {
+                    menu.style.display = 'block';
+                }, 500);
+            }
+        }
+	</script>
+</body>
+</html>

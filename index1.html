@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Aspects - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            margin: 0; 
+            height: 100%; 
+            font-family: 'Orbitron', sans-serif; 
+            background: #1b263b; /* Blue to Green Gradient */
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: flex-start; 
+            color: #fff; 
+            padding: 0 20px;
+            position: relative;
+            overflow-x: hidden;
+            transition: opacity 1s ease-in-out; /* Animazione di dissolvenza */
+        }
+
+        /* Quando la pagina sta per cambiare (durante la transizione) */
+        body.page-transition {
+            opacity: 0;
+        }
+
+        /* Set up the page for scrolling */
+        .content {
+            width: 100%;
+            flex-grow: 1;
+            padding-bottom: 50px; /* Space for footer */
+        }
+
+        /* Header Styling */
+        header {
+            width: 100%;
+            background-color: #005eff;
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between; /* To space out the title and nav */
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-left: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            margin-right: 20px;
+        }
+
+        nav a {
+            font-size: 18px;
+            color: #ffffff;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #F1FAEE;
+            transform: scale(1.1); /* Scale effect on hover */
+        }
+
+        /* Main Content Styling */
+        .container { 
+            margin-top: 100px; /* Space for the fixed header */
+            position: relative; 
+            width: 80%; 
+            max-width: 1200px; 
+            height: auto; 
+            background-color: #00542a; 
+            padding: 20px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        }
+        
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Home Page Description Styling */
+        .home-description {
+            margin-top: 120px; /* Space for the header */
+            width: 80%;
+            max-width: 1200px;
+            text-align: center;
+            background-color: #006328;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .home-description h2 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .home-description p {
+            font-size: 16px;
+            color: #E9ECEF;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Five columns for the 5 topics */
+        .topics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .topic-card {
+            background-color: #E9ECEF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .topic-card:hover {
+            background-color: #F1FAEE;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Color variations for each card */
+        .intro { background-color: #ed78ff; }
+        .benefits { background-color: #69cdff; }
+        .risks { background-color: #ffe880; }
+        .legal { background-color: #ff966a; }
+        .future { background-color: #ff5067; }
+
+        .topic-card h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .topic-card p {
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* Footer Styling */
+        footer {
+            width: 100%;
+            background-color: #000000;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        footer h4 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>AI Aspects</h1> <!-- Title on the left -->
+        <nav>
+            <a href="history.html">History</a> <!-- Changed to 'History' -->
+            <a href="benefits.html">Benefits</a>
+            <a href="risks.html">Risks</a>
+            <a href="legal.html">Legal</a>
+            <a href="future.html">Future</a>
+            <a href="3d.html" id="3dLink">3D Models</a> <!-- 3D Models Link -->
+        </nav>
+    </header>
+
+    <!-- Main Content Section (Scrollable) -->
+    <div class="content">
+        <!-- Home Page Description Section -->
+        <div class="home-description">
+            <h2>Exploring Key Aspects of AI</h2>
+            <p><b>Discover various aspects of artificial intelligence explored by the team members.</b></p>
+        </div>
+        
+        <!-- Topics Section (Five Columns) -->
+        <div class="topics">
+            <div id="intro" class="topic-card intro">
+                <h3>Introduction to AI and Development History</h3>
+                <p><b>Francesco explores the origins and evolution of artificial intelligence, tracing its development over time with key milestones.</b></p>
+            </div>
+            <div id="benefits" class="topic-card benefits">
+                <h3>Benefits of AI</h3>
+                <p><b>Patrick discusses the numerous benefits of AI, including automation, decision-making improvements, and applications in various sectors.</b></p>
+            </div>
+            <div id="risks" class="topic-card risks">
+                <h3>Risks and Ethical Concerns</h3>
+                <p><b>Carlo examines the risks associated with AI, such as job loss and ethical concerns related to automation and privacy.</b></p>
+            </div>
+            <div id="legal" class="topic-card legal">
+                <h3>Legal and Ethical Aspects</h3>
+                <p><b>Daniele explores the legal aspects and ethical implications of AI, including regulation and the legal responsibility of developers.</b></p>
+            </div>
+            <div id="future" class="topic-card future">
+                <h3>The Future of AI</h3>
+                <p><b>Edoardo analyzes the future prospects of AI, including technological advancements, integration into industries, and its transformative potential globally.</b></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <h4>Patrick Colucci, Francesco Moretto, Daniele Signorile, Carlo Pinto, Edoardo Visconte</h4>
+    </footer>
+</body>
+</html>

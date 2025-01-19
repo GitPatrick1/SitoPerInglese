@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal and Ethical Aspects of AI</title>
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling with gradient */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(90deg, #ffb48a, #ff966a);
+            color: #4d2600;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Header */
+        header {
+            background: #cc6600;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            color: #ffffff;
+            font-size: 32px;
+        }
+
+        /* Main content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 1000px;
+            margin-top: 80px;
+            padding-top: 20px;
+            flex-grow: 1;
+        }
+
+        .content-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .box {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            text-align: left;
+            margin-top: 20px;
+            border: 3px solid #cc6600;
+        }
+
+        .box h3 {
+            margin-bottom: 15px;
+            color: #cc3300;
+        }
+
+        .back-home {
+            margin-bottom: 20px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #663300;
+            background: #ffffff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid #cc6600;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .back-home:hover {
+            background: #cc6600;
+            color: #ffffff;
+        }
+        
+        /* Menu toggle styles */
+        #menu-toggle {
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        #popup-menu {
+            display: none;
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background-color: #c35f00;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        #popup-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #popup-menu ul li {
+            margin: 10px 0;
+        }
+
+        #popup-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        #popup-menu a:hover {
+            color: #e17a00;
+        }
+
+        /* Curiosity popup styles */
+        #curiosity-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ff966a;
+            color: #4d2600;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        #curiosity-popup p {
+            margin-bottom: 20px;
+        }
+
+        #close-popup {
+            background: #cc6600;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #close-popup:hover {
+            background: #ff3d00;
+        }
+
+        /* Button Styling */
+        button {
+            background: #cc6600;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #ff3d00;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Legal and Ethical Aspects of AI</h1>
+        <div id="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav id="popup-menu">
+            <ul>
+                <li><a href="benefits.html">Benefits</a></li>
+                <li><a href="3d.html">3D Models</a></li>
+                <li><a href="future.html">Future</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="risks.html">Risks</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="content-box">
+            <div class="box">
+                <h3>Legal Aspects of AI</h3>
+                <p>
+                    The legal implications of artificial intelligence include issues such as data privacy, liability in case of AI errors, and intellectual property rights. Laws and regulations are being developed worldwide to govern the responsible use of AI and mitigate potential risks, ensuring compliance with ethical and legal standards.
+                </p>
+            </div>
+
+            <div class="box">
+                <h3>Ethical Aspects of AI</h3>
+                <p>
+                    Ethical concerns around AI focus on fairness, accountability, and transparency. Bias in AI algorithms can lead to unfair treatment of individuals, and it is crucial to ensure AI systems are designed and deployed in ways that respect human rights and ethical principles.
+                </p>
+            </div>
+
+            <button onclick="showCuriosity()">Click for a Curiosity</button>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-home">Back to Home</a>
+
+    <!-- Curiosity Popup -->
+    <div id="curiosity-popup">
+        <p id="curiosity-text">Did you know that AI has been used in legal systems to assist judges in making decisions, but it raises concerns about fairness and bias?</p>
+        <button id="close-popup" onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('popup-menu');
+            const currentState = menu.style.display;
+            menu.style.display = currentState === 'block' ? 'none' : 'block';
+
+            if (currentState !== 'block') {
+                setTimeout(() => {
+                    menu.style.display = 'block';
+                }, 500);
+            }
+        }
+
+        // Function to show the curiosity popup
+        function showCuriosity() {
+            document.getElementById('curiosity-popup').style.display = 'block';
+        }
+
+        // Function to close the curiosity popup
+        function closePopup() {
+            document.getElementById('curiosity-popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
