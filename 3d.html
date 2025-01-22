@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Models</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6A1B9A;
+            --secondary-color: #9C27B0;
+            --accent-color: #E1BEE7;
+            --glow-color: #AB47BC;
+            --background-dark: #4A148C;
+            --background-light: #7B1FA2;
+            --text-color: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at center, var(--background-dark) 0%, var(--background-light) 100%);
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .grid {
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(transparent 0%, transparent 49%, var(--glow-color) 50%, transparent 51%),
+                linear-gradient(90deg, transparent 0%, transparent 49%, var(--glow-color) 50%, transparent 51%);
+            background-size: 50px 50px;
+            opacity: 0.15;
+            transform: perspective(500px) rotateX(60deg);
+            animation: gridMove 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        header {
+            background: linear-gradient(90deg, var(--background-dark) 0%, var(--background-light) 100%);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid var(--glow-color);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .header-title {
+            font-size: 40px;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(45deg, var(--accent-color), var(--glow-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(171, 71, 188, 0.5);
+            animation: glowPulse 2s infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
+        }
+
+        .content {
+            padding: 120px 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 30px;
+        }
+
+        .text-column {
+            width: 65%;
+            background: rgba(156, 39, 176, 0.1);
+            border: 2px solid var(--glow-color);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            animation: float 6s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .text-column::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(171, 71, 188, 0.2),
+                transparent
+            );
+            animation: shine 8s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .model-column {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .model-card {
+            background: rgba(156, 39, 176, 0.3);
+            border: 2px solid var(--glow-color);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .model-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+
+        .menu-toggle {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            transform: rotate(180deg);
+        }
+
+        .popup-menu {
+            position: absolute;
+            right: 20px;
+            top: 70px;
+            background: rgba(156, 39, 176, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid var(--glow-color);
+            display: none;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .popup-menu.active {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .popup-menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .popup-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .popup-menu a:hover::after {
+            width: 100%;
+        }
+
+        .back-to-home {
+            display: block;
+            width: fit-content;
+            margin: 40px auto;
+            padding: 15px 30px;
+            background: var(--secondary-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 30px;
+            border: 2px solid var(--glow-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-to-home::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .back-to-home:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .back-to-home:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(171, 71, 188, 0.4);
+        }
+
+        .floating-particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid"></div>
+    <canvas class="floating-particles" id="particles"></canvas>
+
+    <header>
+        <h1 class="header-title">3D MODELS</h1>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav class="popup-menu" id="popup-menu">
+            <a href="benefits.html">Benefits</a>
+            <a href="risks.html">Risks</a>
+            <a href="future.html">Future</a>
+            <a href="history.html">History</a>
+            <a href="legal.html">Legal</a>
+        </nav>
+    </header>
+
+    <div class="content">
+        <div class="text-column">
+            <h2>3D Models and Artificial Intelligence</h2>
+            <p>In the realm of <strong>3D modeling</strong>, <strong>artificial intelligence</strong> has transformed the way we create and interact with virtual objects. AI technologies such as <strong>machine learning</strong>, <strong>neural networks</strong>, and <strong>procedural generation algorithms</strong> have empowered creators to build intricate and dynamic 3D models more efficiently and with greater precision.</p>
+            <p>Previously, creating realistic 3D models for <strong>games</strong>, <strong>movies</strong>, or <strong>simulations</strong> was a labor-intensive process requiring significant skill and time. With the advent of AI-driven tools, artists can now leverage intelligent systems that assist with tasks like <strong>texture generation</strong>, <strong>rigging</strong>, and even the automatic generation of <strong>environments</strong>.</p>
+            <p><strong>AI-driven systems</strong> can generate complex shapes, analyze real-world data to create lifelike models, and even generate entirely new forms based on input data. This synergy between human creativity and AI's computational power has opened new possibilities for designers and developers alike.</p>
+        </div>
+
+        <div class="model-column">
+            <div class="model-card">
+                <iframe title="oBot - Cute Robot Challenge" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/17fe944bd57941cabb698fe9d0a4f3c2/embed"></iframe>
+            </div>
+            <div class="model-card">
+                <iframe title="Kirby's Robobot from - Planet Robobot" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/9fe53ce43c474990abf10231edf73f5c/embed"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <a href="index1.html" class="back-to-home">Back to Home</a>
+
+    <script>
+        // Floating Particles Animation
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        }
+
+        function initParticles() {
+            particles = [];
+            for(let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 3 + 1,
+                    speedX: (Math.random() - 0.5) * 2,
+                    speedY: (Math.random() - 0.5) * 2,
+                    opacity: Math.random() * 0.5 + 0.2
+                });
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                particle.x += particle.speedX;
+                particle.y += particle.speedY;
+
+                if(particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+                if(particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(171, 71, 188, ${particle.opacity})`;
+                ctx.fill();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        animateParticles();
+
+        // Enhanced Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('popup-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('popup-menu');
+            const toggle = document.querySelector('.menu-toggle');
+            if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

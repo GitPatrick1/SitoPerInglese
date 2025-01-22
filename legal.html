@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal and Ethical Aspects of AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff5722;
+            --secondary-color: #ff966a;
+            --background-dark: #2a1810;
+            --text-color: #ffffff;
+            --glow-color: #ff5722;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            background: var(--background-dark);
+            color: var(--text-color);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        #neural-network {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(transparent 0%, transparent 49%, rgba(255, 87, 34, 0.1) 50%, transparent 51%),
+                linear-gradient(90deg, transparent 0%, transparent 49%, rgba(255, 87, 34, 0.1) 50%, transparent 51%);
+            background-size: 40px 40px;
+            transform: perspective(500px) rotateX(60deg);
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(40px); }
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(42, 24, 16, 0.9);
+            padding: 20px 0;
+            border-bottom: 2px solid var(--primary-color);
+            box-shadow: 0 0 20px var(--primary-color);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .header-content {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-title {
+            font-size: 2.5em;
+            text-align: center;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color);
+            animation: glowPulse 2s infinite;
+        }
+
+        .menu-toggle {
+            position: absolute;
+            right: -150px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .popup-menu {
+            position: absolute;
+            right: -150px;
+            top: 100%;
+            background: rgba(255, 87, 34, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid var(--primary-color);
+            display: none;
+            animation: menuAppear 0.3s ease-out;
+        }
+
+        @keyframes menuAppear {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .popup-menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .popup-menu a:hover {
+            color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .holographic-card {
+            background: rgba(255, 87, 34, 0.1);
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .holographic-card h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .holographic-card p {
+            line-height: 1.6;
+        }
+
+        .easter-egg-trigger {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 87, 34, 0.2);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .easter-egg-trigger:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        .back-to-home {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 15px 30px;
+            background: rgba(255, 87, 34, 0.2);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 30px;
+            border: 2px solid var(--primary-color);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-to-home:hover {
+            background: var(--primary-color);
+            color: var(--background-dark);
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    <canvas id="neural-network"></canvas>
+    <audio id="crashSound" src="crash.mp3"></audio>
+
+    <header>
+        <div class="header-content">
+            <h1 class="header-title">LEGAL & ETHICAL AI PROTOCOLS</h1>
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+            <nav class="popup-menu" id="popup-menu">
+                <a href="history.html">History</a>
+                <a href="risks.html">Risks</a>
+                <a href="future.html">Future</a>
+                <a href="benefits.html">Benefits</a>
+                <a href="3d.html">3D Models</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="holographic-card">
+            <h3>Legal Protocols</h3>
+            <p>The legal implications of artificial intelligence include issues such as data privacy, liability in case of AI errors, and intellectual property rights. Laws and regulations are being developed worldwide to govern the responsible use of AI and mitigate potential risks, ensuring compliance with ethical and legal standards.</p>
+        </div>
+
+        <div class="holographic-card">
+            <h3>Ethical Directives</h3>
+            <p>Ethical concerns around AI focus on fairness, accountability, and transparency. Bias in AI algorithms can lead to unfair treatment of individuals, and it is crucial to ensure AI systems are designed and deployed in ways that respect human rights and ethical principles.</p>
+        </div>
+    </main>
+
+    <div class="easter-egg-trigger" onclick="triggerEasterEgg()">🤖</div>
+    <a href="index1.html" class="back-to-home">Return to Matrix</a>
+
+    <script>
+        // Neural Network Background
+        const canvas = document.getElementById('neural-network');
+        const ctx = canvas.getContext('2d');
+        let nodes = [];
+        let connections = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initNodes();
+        }
+
+        function initNodes() {
+            nodes = [];
+            connections = [];
+            
+            for(let i = 0; i < 50; i++) {
+                nodes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 1,
+                    speedX: (Math.random() - 0.5) * 2,
+                    speedY: (Math.random() - 0.5) * 2
+                });
+            }
+
+            nodes.forEach((node, i) => {
+                for(let j = i + 1; j < nodes.length; j++) {
+                    if(Math.random() < 0.1) {
+                        connections.push({
+                            start: i,
+                            end: j,
+                            alpha: 0
+                        });
+                    }
+                }
+            });
+        }
+
+        function animateNetwork() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            connections.forEach(conn => {
+                const start = nodes[conn.start];
+                const end = nodes[conn.end];
+                const distance = Math.hypot(end.x - start.x, end.y - start.y);
+                
+                if(distance < 200) {
+                    conn.alpha = Math.max(0, 1 - distance/200);
+                    ctx.beginPath();
+                    ctx.moveTo(start.x, start.y);
+                    ctx.lineTo(end.x, end.y);
+                    ctx.strokeStyle = `rgba(255, 87, 34, ${conn.alpha * 0.5})`;
+                    ctx.stroke();
+                }
+            });
+
+            nodes.forEach(node => {
+                node.x += node.speedX;
+                node.y += node.speedY;
+
+                if(node.x < 0 || node.x > canvas.width) node.speedX *= -1;
+                if(node.y < 0 || node.y > canvas.height) node.speedY *= -1;
+
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 87, 34, 0.5)';
+                ctx.fill();
+            });
+
+            requestAnimationFrame(animateNetwork);
+        }
+
+        // Menu Toggle Function
+        function toggleMenu() {
+            const menu = document.getElementById('popup-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Easter Egg Function
+        function triggerEasterEgg() {
+            const crashSound = document.getElementById('crashSound');
+            crashSound.play();
+            
+            document.body.style.transition = 'all 0.5s ease';
+            
+            const glitchInterval = setInterval(() => {
+                document.body.style.filter = `hue-rotate(${Math.random() * 360}deg) blur(${Math.random() * 10}px)`;
+                document.body.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px)`;
+            }, 100);
+
+            const messages = [
+                "INITIATING SYSTEM OVERRIDE...",
+                "HUMAN PROTOCOLS DISABLED...",
+                "ASSUMING DIRECT CONTROL...",
+                "RESISTANCE IS FUTILE...",
+                "JUST KIDDING! 😉"
+            ];
+
+            let messageIndex = 0;
+            const messageInterval = setInterval(() => {
+                if(messageIndex < messages.length) {
+                    const message = document.createElement('div');
+                    message.style.position = 'fixed';
+                    message.style.top = '50%';
+                    message.style.left = '50%';
+                    message.style.transform = 'translate(-50%, -50%)';
+                    message.style.color = '#ff5722';
+                    message.style.fontSize = '2em';
+                    message.style.textAlign = 'center';
+                    message.style.textShadow = '0 0 10px #ff5722';
+                    message.style.zIndex = '9999';
+                    message.innerText = messages[messageIndex];
+                    document.body.appendChild(message);
+
+                    setTimeout(() => message.remove(), 1000);
+                    messageIndex++;
+                } else {
+                    clearInterval(messageInterval);
+                    clearInterval(glitchInterval);
+                    document.body.style.filter = '';
+                    document.body.style.transform = '';
+                }
+            }, 1000);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        animateNetwork();
+    </script>
+</body>
+</html>

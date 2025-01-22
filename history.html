@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History of AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-glow: #e100ff;
+            --secondary-glow: #8f68ff;
+            --background-dark: #0d1b2a;
+            --background-light: #1b263b;
+            --accent-color: #487bff;
+        }
+
+        body {
+            background: radial-gradient(circle at center, var(--background-dark) 0%, var(--background-light) 100%);
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background grid */
+        .grid {
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(transparent 0%, transparent 49%, var(--primary-glow) 50%, transparent 51%),
+                linear-gradient(90deg, transparent 0%, transparent 49%, var(--primary-glow) 50%, transparent 51%);
+            background-size: 50px 50px;
+            opacity: 0.15;
+            transform: perspective(500px) rotateX(60deg);
+            animation: gridMove 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        /* Header styling */
+        header {
+            background: linear-gradient(90deg, var(--background-dark) 0%, var(--background-light) 100%);
+            padding: 20px 0;
+            position: relative;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary-glow);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .header-content {
+            position: relative;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header-title {
+            font-size: 40px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(225, 0, 255, 0.5);
+            animation: glowPulse 2s infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
+        }
+
+        /* Main content */
+        .content {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .text-column {
+            flex: 1 1 600px;
+            background: rgba(225, 0, 255, 0.1);
+            border: 2px solid var(--primary-glow);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .chat-container {
+            flex: 1 1 400px;
+            background: rgba(122, 1, 120, 0.3);
+            border: 2px solid var(--primary-glow);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-box {
+            height: 400px;
+            background: rgba(39, 39, 39, 0.6);
+            border: 1px solid var(--primary-glow);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            overflow-y: auto;
+        }
+
+        .bot-message, .user-message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            animation: messageAppear 0.3s ease-out;
+        }
+
+        @keyframes messageAppear {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bot-message {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--secondary-glow);
+        }
+
+        .user-message {
+            background: rgba(238, 139, 255, 0.3);
+            border: 1px solid var(--primary-glow);
+            text-align: right;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary-glow);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 10px;
+        }
+
+        .send-button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: 2px solid var(--primary-glow);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(225, 0, 255, 0.3);
+        }
+
+        .menu-toggle {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            color: var(--primary-glow);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .popup-menu {
+            position: absolute;
+            right: 20px;
+            top: 70px;
+            background: rgba(105, 205, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid var(--primary-glow);
+            display: none;
+            animation: menuAppear 0.3s ease-out;
+        }
+
+        @keyframes menuAppear {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .popup-menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .popup-menu a:hover {
+            color: var(--primary-glow);
+            transform: translateX(5px);
+        }
+
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 40px auto;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+    </style>
+</head>
+<body>
+    <div class="grid"></div>
+
+    <header>
+        <div class="header-content">
+            <h1 class="header-title">HISTORY OF ARTIFICIAL INTELLIGENCE</h1>
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+            <nav class="popup-menu" id="popup-menu">
+                <a href="benefits.html">Benefits</a>
+                <a href="3d.html">3D Models</a>
+                <a href="future.html">Future</a>
+                <a href="risks.html">Risks</a>
+                <a href="legal.html">Legal</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="text-column">
+            <h2>Introduction to AI History</h2>
+            <p>The history of artificial intelligence (AI) dates back to the mid-20th century, when researchers first
+                began to explore the possibility of creating machines capable of mimicking human thought
+                processes. The term "artificial intelligence" was coined in 1956 during a workshop at Dartmouth
+                College, where scientists like <b>John McCarthy</b>, <b>Marvin Minsky</b>, and <b>Allen Newell</b> laid the foundation for
+                the field.</p>
+            <p>Early achievements focused on symbolic reasoning and problem-solving, with computers
+                solving mathematical equations and playing games like chess. In the 1980s, the development of
+                expert systems brought AI closer to practical applications, using knowledge bases to simulate human
+                decision-making in fields like medicine and engineering.</p>
+            <p>However, progress slowed due to limitations in computational power and funding, leading to the so-called "AI winter." The resurgence
+                of AI in the 21st century has been driven by advancements in machine learning, neural networks, and
+                the exponential growth of data and computing power.</p>
+            <p>Today, AI plays a transformative role in industries ranging from healthcare and finance to autonomous vehicles and creative arts, making it a
+                cornerstone of modern technological innovation.</p>
+        </div>
+
+        <div class="chat-container">
+            <h2>HistoryBot Chat</h2>
+            <div class="chat-box" id="chat-box">
+                <div class="bot-message">Hello! How can I assist you with AI history today?</div>
+            </div>
+            <input type="text" class="chat-input" placeholder="Type your message...">
+            <button class="send-button">Send</button>
+        </div>
+    </div>
+
+    <div class="video-container">
+        <h2>Watch This Video about AI's History</h2>
+        <iframe 
+            src="https://www.youtube.com/embed/33k89e_LsiQ" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <a href="index1.html" class="back-button">Back to Home</a>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('popup-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('popup-menu');
+            const toggle = document.querySelector('.menu-toggle');
+            if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+                menu.style.display = 'none';
+            }
+        });
+    </script>
+	<script src="script.js"></script>
+</body>
+</html>

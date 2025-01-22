@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Future of AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-red: #ff0066;
+            --dark-red: #800020;
+            --light-red: #ff3366;
+            --accent-red: #ff1a1a;
+            --bg-dark: #1a0000;
+            --glow-color: rgba(255, 0, 102, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .cyberpunk-grid {
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(transparent 0%, transparent 49%, var(--neon-red) 50%, transparent 51%),
+                linear-gradient(90deg, transparent 0%, transparent 49%, var(--neon-red) 50%, transparent 51%);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            transform: perspective(500px) rotateX(60deg);
+            animation: gridMove 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        header {
+            background: linear-gradient(90deg, var(--dark-red), var(--neon-red));
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid var(--neon-red);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .header-title {
+            font-size: 40px;
+            font-weight: 700;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-red);
+            animation: glowPulse 2s infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { text-shadow: 0 0 10px var(--neon-red); }
+            50% { text-shadow: 0 0 20px var(--neon-red), 0 0 30px var(--light-red); }
+        }
+
+        .content {
+            padding: 120px 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .future-box {
+            background: rgba(128, 0, 32, 0.3);
+            border: 2px solid var(--neon-red);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .future-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, var(--neon-red) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: rotateBg 10s linear infinite;
+        }
+
+        @keyframes rotateBg {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .future-box h3 {
+            color: var(--neon-red);
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-shadow: 0 0 5px var(--neon-red);
+        }
+
+        .future-box p {
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-toggle {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            transform: rotate(180deg);
+            text-shadow: 0 0 10px var(--neon-red);
+        }
+
+        .popup-menu {
+            position: absolute;
+            right: 20px;
+            top: 70px;
+            background: rgba(128, 0, 32, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid var(--neon-red);
+            display: none;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .popup-menu.active {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .popup-menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .popup-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-red);
+            transition: width 0.3s ease;
+        }
+
+        .popup-menu a:hover::after {
+            width: 100%;
+        }
+
+        .back-to-home {
+            display: block;
+            width: fit-content;
+            margin: 40px auto;
+            padding: 15px 30px;
+            background: var(--dark-red);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            border: 2px solid var(--neon-red);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-to-home::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 0, 102, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .back-to-home:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .back-to-home:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cyberpunk-grid"></div>
+    <canvas id="particles"></canvas>
+
+    <header>
+        <h1 class="header-title">THE FUTURE OF AI</h1>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav class="popup-menu" id="popup-menu">
+            <a href="benefits.html">Benefits</a>
+            <a href="risks.html">Risks</a>
+            <a href="3d.html">3D Models</a>
+            <a href="history.html">History</a>
+            <a href="legal.html">Legal</a>
+        </nav>
+    </header>
+
+    <div class="content">
+        <div class="future-box">
+            <h3>AI and Automation</h3>
+            <p>The future of artificial intelligence promises significant advances in automation, with machines taking over repetitive and dangerous tasks. AI will automate not just basic operations but complex functions, from diagnostics in healthcare to automating customer service in finance. We'll see AI systems capable of enhancing efficiency and saving time, transforming industries like logistics and education. The integration of AI into daily life will lead to smarter cities, personalized services, and increasingly autonomous systems.</p>
+        </div>
+
+        <div class="future-box">
+            <h3>Quantum Computing and AI</h3>
+            <p>Quantum computing will dramatically impact AI, pushing the boundaries of what is possible. Quantum machines can process massive amounts of data far faster than current classical computers, leading to breakthroughs in machine learning and problem-solving capabilities. AI algorithms running on quantum computers will revolutionize industries such as drug discovery, material science, and climate modeling. Quantum computing will make AI smarter, faster, and more efficient, opening doors to new realms of automation and discovery that were previously unimaginable.</p>
+        </div>
+    </div>
+
+    <a href="index1.html" class="back-to-home">Back to Home</a>
+
+    <script>
+        // Particle Animation
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        }
+
+        function initParticles() {
+            particles = [];
+            for(let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 1,
+                    speedX: (Math.random() - 0.5) * 2,
+                    speedY: (Math.random() - 0.5) * 2,
+                    color: `rgba(255, ${Math.floor(Math.random() * 50)}, ${Math.floor(Math.random() * 102)}, ${Math.random() * 0.5 + 0.2})`
+                });
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((particle, index) => {
+                particle.x += particle.speedX;
+                particle.y += particle.speedY;
+
+                if(particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+                if(particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                ctx.fillStyle = particle.color;
+                ctx.fill();
+
+                // Connect particles
+                for(let j = index + 1; j < particles.length; j++) {
+                    const dx = particles[j].x - particle.x;
+                    const dy = particles[j].y - particle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if(distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 0, 102, ${0.1 * (1 - distance/100)})`;
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        animateParticles();
+
+        // Enhanced Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('popup-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('popup-menu');
+            const toggle = document.querySelector('.menu-toggle');
+            if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
